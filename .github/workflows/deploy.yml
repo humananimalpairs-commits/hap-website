@@ -30,6 +30,11 @@ jobs:
           NOTION_NEWS_DB: ${{ secrets.NOTION_NEWS_DB }}
           NOTION_CATS_DB: ${{ secrets.NOTION_CATS_DB }}
           PUBLIC_TURNSTILE_SITE_KEY: ${{ vars.PUBLIC_TURNSTILE_SITE_KEY }}
+      - name: Create Pages project (first time only)
+        run: npx --yes wrangler@3 pages project create humananimalpairs --production-branch=main || true
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/wrangler-action@v3
         with:
