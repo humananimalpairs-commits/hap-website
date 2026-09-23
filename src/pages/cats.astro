@@ -1,0 +1,59 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import CatCard from '../components/CatCard.astro';
+import { cats } from '../lib/content';
+---
+<Base title="里親募集" description="Human Animal Pairs で新しい家族を待っている保護猫たちと、譲渡までの流れ・条件のご案内。">
+  <PageHero en="Adoption" title="里親募集" lead="新しい家族を待っている猫たちです。" />
+
+  <section class="section">
+    <div class="container">
+      {cats.length > 0 ? (
+        <div class="grid grid-3">{cats.map((c) => <CatCard cat={c} />)}</div>
+      ) : (
+        <p class="center muted">現在、募集中の猫はいません。最新情報はお知らせをご確認ください。</p>
+      )}
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Flow</span>
+        <h2>譲渡までの流れ</h2>
+      </div>
+      <ol class="steps">
+        <li><strong>お問い合わせ・ご来店</strong><span>気になる子がいたら、お問い合わせフォームか CAT HOME GARDEN でスタッフにお声がけください。</span></li>
+        <li><strong>アンケート・面談</strong><span>飼育環境やご家族の状況をお伺いし、相性の良い子を一緒に考えます。</span></li>
+        <li><strong>お見合い</strong><span>カフェで実際に猫と過ごし、性格や相性を確認します。</span></li>
+        <li><strong>トライアル</strong><span>ご自宅で一定期間一緒に暮らし、お互いに無理がないかを確かめます。</span></li>
+        <li><strong>正式譲渡</strong><span>譲渡契約を結び、新しい家族としての生活がスタートします。</span></li>
+      </ol>
+      <p class="small muted" style="margin-top:12px"><span class="todo">【要確認】実際の手順・トライアル期間に合わせて調整してください</span></p>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Conditions</span>
+        <h2>譲渡の条件</h2>
+      </div>
+      <div class="card">
+        <ul class="check-list">
+          <li>完全室内飼育をお約束いただける方</li>
+          <li>ペット飼育可能な住居にお住まいの方</li>
+          <li>ご家族全員が迎え入れに賛成されている方</li>
+          <li>終生、責任を持って飼育していただける方</li>
+          <li>適切な医療（ワクチン・健康診断など）を受けさせていただける方</li>
+          <li>譲渡後の近況報告にご協力いただける方</li>
+        </ul>
+        <p class="small muted" style="margin-top:16px">
+          医療費の一部として譲渡費用をお願いしています：<span class="todo">【要確認】金額・内訳</span>
+        </p>
+      </div>
+      <p class="center" style="margin-top:36px"><a class="btn" href="/contact/?type=adoption">譲渡について問い合わせる</a></p>
+    </div>
+  </section>
+</Base>

@@ -1,0 +1,42 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { links } from '../data/site';
+
+// 事業報告書などのPDFは public/docs/ に置き、ここに追記してください。
+// 例: { title: '令和6年度 事業報告書', href: '/docs/report-r6.pdf' }
+const docs: { title: string; href: string }[] = [];
+---
+<Base title="情報公開" description="NPO法人 Human Animal Pairs の定款、事業報告書、活動計算書などの情報公開。">
+  <PageHero en="Disclosure" title="情報公開" lead="私たちの活動と会計を、透明性をもって公開しています。" />
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="card">
+        <h2 class="h">事業報告書・活動計算書・定款</h2>
+        {docs.length > 0 ? (
+          <ul class="doc-list">
+            {docs.map((d) => (
+              <li><a href={d.href} target="_blank" rel="noopener"><Icon name="doc" />{d.title}（PDF）</a></li>
+            ))}
+          </ul>
+        ) : (
+          <p class="muted">PDFの掲載準備中です。<span class="todo">【要確認】各年度の資料をアップロード</span></p>
+        )}
+        <p>
+          東京都の「NPO法人ポータルサイト」でも、当法人の定款・事業報告書・役員名簿などを閲覧いただけます。
+        </p>
+        <a class="btn outline" href={links.tokyoLedger} target="_blank" rel="noopener">東京都 NPO法人ポータルサイトで見る</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .h { font-size: 1.3rem; }
+  .doc-list { list-style: none; padding: 0; margin: 0 0 24px; }
+  .doc-list li + li { border-top: 1px solid var(--line); }
+  .doc-list a { display: flex; align-items: center; gap: 12px; padding: 14px 4px; font-weight: 500; }
+  .doc-list :global(svg) { width: 24px; height: 24px; flex-shrink: 0; }
+</style>

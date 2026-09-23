@@ -1,0 +1,36 @@
+---
+import type { Cat } from '../lib/content';
+interface Props { cat: Cat }
+const { cat } = Astro.props;
+const statusClass = cat.status === '募集中' ? '' : cat.status === 'お見合い中' ? 'leaf' : 'gray';
+---
+<article class="cat-card">
+  <div class="photo">
+    {cat.image
+      ? <img src={cat.image} alt={`${cat.name}の写真`} loading="lazy" />
+      : <div class="noimg" aria-hidden="true"><img src="/images/logo-mark.png" alt="" /><span>写真準備中</span></div>}
+    <span class={`tag status ${statusClass}`}>{cat.status}</span>
+  </div>
+  <div class="body">
+    <h3>{cat.name}</h3>
+    <p class="meta">{[cat.sex, cat.age, cat.color].filter(Boolean).join(' ／ ')}</p>
+    {cat.personality && <p class="pers">{cat.personality}</p>}
+    {cat.medical.length > 0 && (
+      <ul class="med">{cat.medical.map((m) => <li class="tag leaf">{m}</li>)}</ul>
+    )}
+  </div>
+</article>
+<style>
+  .cat-card { background: #fff; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); border: 1px solid var(--line); display: flex; flex-direction: column; }
+  .photo { position: relative; aspect-ratio: 4 / 3; background: var(--brand-tint); }
+  .photo > img { width: 100%; height: 100%; object-fit: cover; }
+  .noimg { height: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; color: var(--brand); font-size: 0.85rem; font-weight: 700; }
+  .noimg img { width: 64px; opacity: 0.5; }
+  .status { position: absolute; top: 12px; left: 12px; font-size: 0.8rem; }
+  .status:not(.leaf):not(.gray) { background: var(--brand-strong); color: #fff; }
+  .body { padding: 20px 22px 24px; }
+  .body h3 { font-size: 1.15rem; margin-bottom: 4px; }
+  .meta { color: var(--ink-soft); font-size: 0.88rem; margin-bottom: 10px; }
+  .pers { font-size: 0.95rem; margin-bottom: 12px; }
+  .med { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 6px; }
+</style>

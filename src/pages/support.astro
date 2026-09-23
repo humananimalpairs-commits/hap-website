@@ -1,0 +1,84 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { links } from '../data/site';
+---
+<Base title="ご支援のお願い" description="Human Animal Pairs は特例認定NPO法人です。ご寄付・年会員・物品寄付・ボランティアで、保護猫たちの命をつなぐ活動を支えてください。">
+  <PageHero en="Support us" title="ご支援のお願い" lead="みなさまのご支援が、保護猫たちの医療費・ごはん代・新しい家族との出会いにつながります。" />
+
+  <section class="section">
+    <div class="container">
+      <div class="tax card">
+        <span class="tag">特例認定NPO法人</span>
+        <h2>ご寄付は税制優遇の対象です</h2>
+        <p>
+          Human Animal Pairs は東京都から<strong>特例認定</strong>を受けたNPO法人です。
+          当法人へのご寄付は、確定申告を行うことで寄附金控除などの税制優遇を受けられます。
+          ご寄付いただいた方には領収書を発行いたします。
+        </p>
+        <p class="small muted">※ 控除の方法や金額は、寄付される方の状況により異なります。詳しくは税務署または税理士にご確認ください。</p>
+      </div>
+
+      <div class="grid grid-2 ways">
+        <div class="card">
+          <div class="icon-badge"><Icon name="heart" /></div>
+          <h3>寄付する</h3>
+          <p>活動へのご寄付をオンラインで受け付けています。</p>
+          <a class="btn" href={links.syncable} target="_blank" rel="noopener">オンラインで寄付する</a>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><Icon name="paw" /></div>
+          <h3>年会員になる</h3>
+          <p>年会費で継続的に活動を支えていただく会員制度です。</p>
+          <a class="btn" href={links.syncable} target="_blank" rel="noopener">年会員に申し込む</a>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><Icon name="gift" /></div>
+          <h3>物品で支援する</h3>
+          <p>服やブランド品などのご寄付を、活動資金に換えて役立てています。猫用品のご寄付については事前にご相談ください。</p>
+          <a class="btn outline" href={links.syncable} target="_blank" rel="noopener">物品寄付について</a>
+        </div>
+        <div class="card">
+          <div class="icon-badge"><Icon name="megaphone" /></div>
+          <h3>支援を広げる</h3>
+          <p>SNS でのシェアや、ご友人・職場への呼びかけなど、支援集めのお手伝いも大きな力になります。</p>
+          <a class="btn outline" href={links.syncable} target="_blank" rel="noopener">詳しく見る</a>
+        </div>
+      </div>
+      <p class="center small muted" style="margin-top:20px">オンライン寄付は、寄付プラットフォーム「Syncable（シンカブル）」を利用しています。</p>
+    </div>
+  </section>
+
+  <section class="section leaf" id="volunteer">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Volunteer</span>
+        <h2>ボランティア募集</h2>
+        <p>中高生から社会人まで、さまざまな方が活動に参加しています。</p>
+      </div>
+      <div class="card">
+        <h3>活動内容の例</h3>
+        <ul class="check-list">
+          <li>保護猫カフェでの猫のお世話（ごはん・トイレ・掃除）</li>
+          <li>譲渡会・イベントの準備や運営</li>
+          <li>写真撮影、SNSでの発信</li>
+          <li>チラシ配布など地域への広報</li>
+        </ul>
+        <p class="small muted">
+          ※ 中学生・高校生の方は、保護者の方の同意が必要です。
+          <span class="todo">【要確認】参加条件・頻度</span>
+        </p>
+        <p class="center" style="margin:24px 0 0"><a class="btn leaf" href="/contact/?type=volunteer">ボランティアに応募する</a></p>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .tax { max-width: 880px; margin: 0 auto 48px; border: 2px solid var(--brand); background: linear-gradient(135deg, #fff, var(--brand-tint)); }
+  .tax h2 { font-size: 1.5rem; margin-top: 10px; }
+  .ways .card { display: flex; flex-direction: column; }
+  .ways .card p { flex: 1; }
+  .ways .btn { align-self: flex-start; }
+</style>

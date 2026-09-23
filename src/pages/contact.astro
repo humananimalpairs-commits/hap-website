@@ -1,0 +1,117 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { org } from '../data/site';
+const turnstileKey = import.meta.env.PUBLIC_TURNSTILE_SITE_KEY;
+const types = [
+  ['general', '一般的なお問い合わせ'],
+  ['adoption', '猫の譲渡について'],
+  ['cafe', 'CAT HOME GARDEN について'],
+  ['volunteer', 'ボランティアについて'],
+  ['support', 'ご寄付・ご支援について'],
+  ['media', '取材・講演のご依頼'],
+  ['other', 'その他'],
+];
+---
+<Base title="お問い合わせ" description="NPO法人 Human Animal Pairs へのお問い合わせフォーム。">
+  {turnstileKey && <script is:inline src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>}
+  <PageHero en="Contact" title="お問い合わせ" lead="お気軽にお問い合わせください。内容を確認のうえ、担当者よりご連絡いたします。" />
+
+  <section class="section">
+    <div class="container narrow">
+      <form id="contact-form" class="card form" novalidate>
+        <div class="field">
+          <label for="type">お問い合わせの種類 <span class="req">必須</span></label>
+          <select id="type" name="type" required>
+            {types.map(([v, l]) => <option value={v}>{l}</option>)}
+          </select>
+        </div>
+        <div class="field">
+          <label for="name">お名前 <span class="req">必須</span></label>
+          <input id="name" name="name" type="text" autocomplete="name" required maxlength="100" />
+        </div>
+        <div class="field">
+          <label for="email">メールアドレス <span class="req">必須</span></label>
+          <input id="email" name="email" type="email" autocomplete="email" required maxlength="200" />
+        </div>
+        <div class="field">
+          <label for="tel">電話番号 <span class="opt">任意</span></label>
+          <input id="tel" name="tel" type="tel" autocomplete="tel" maxlength="30" />
+        </div>
+        <div class="field">
+          <label for="message">お問い合わせ内容 <span class="req">必須</span></label>
+          <textarea id="message" name="message" rows="7" required maxlength="4000"></textarea>
+        </div>
+        <div class="hp" aria-hidden="true">
+          <label>この欄は空欄のままにしてください<input name="website" tabindex="-1" autocomplete="off" /></label>
+        </div>
+        <div class="field check">
+          <label><input type="checkbox" name="agree" required /> <span><a href="/privacy/" target="_blank">プライバシーポリシー</a>に同意する</span></label>
+        </div>
+        {turnstileKey && <div class="cf-turnstile" data-sitekey={turnstileKey}></div>}
+        <p class="status" role="status" aria-live="polite"></p>
+        <button class="btn" type="submit">送信する</button>
+      </form>
+      <p class="center muted small" style="margin-top:28px">
+        お電話でのお問い合わせ：<a href={`tel:${org.tel.replace(/-/g, '')}`}>{org.tel}</a>
+      </p>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .form { padding: 40px; }
+  .field { margin-bottom: 22px; }
+  .field > label { display: block; font-weight: 700; margin-bottom: 6px; }
+  .req, .opt { font-size: 0.72rem; padding: 1px 8px; border-radius: 999px; margin-left: 6px; vertical-align: 2px; }
+  .req { background: var(--brand-strong); color: #fff; }
+  .opt { background: #eee8e5; color: #6a5e5a; }
+  input, select, textarea {
+    width: 100%; font: inherit; padding: 12px 14px; border: 1.5px solid #e2d4cc; border-radius: 12px; background: #fff; color: var(--ink);
+  }
+  input:focus, select:focus, textarea:focus { outline: none; border-color: var(--brand-strong); box-shadow: 0 0 0 3px var(--brand-soft); }
+  .check label { display: flex; align-items: center; gap: 10px; font-weight: 500; }
+  .check input { width: 20px; height: 20px; accent-color: var(--brand-strong); }
+  .hp { position: absolute; left: -9999px; }
+  .status { min-height: 1.5em; font-weight: 700; }
+  .status.ok { color: #3f6b47; }
+  .status.ng { color: #b3261e; }
+  button[disabled] { opacity: 0.6; cursor: wait; }
+  @media (max-width: 640px) { .form { padding: 28px 20px; } }
+</style>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = form.querySelector('.status') as HTMLElement;
+  const btn = form.querySelector('button[type=submit]') as HTMLButtonElement;
+
+  // ?type=adoption などで種類を初期選択
+  const t = new URLSearchParams(location.search).get('type');
+  if (t) (form.elements.namedItem('type') as HTMLSelectElement).value = t;
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'status';
+    if (!form.checkValidity()) {
+      status.textContent = '未入力の必須項目があります。';
+      status.classList.add('ng');
+      form.reportValidity();
+      return;
+    }
+    btn.disabled = true;
+    status.textContent = '送信しています…';
+    try {
+      const res = await fetch('/api/contact', { method: 'POST', body: new FormData(form) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || '送信に失敗しました');
+      form.reset();
+      status.textContent = 'お問い合わせを受け付けました。担当者よりご連絡いたします。';
+      status.classList.add('ok');
+    } catch (err) {
+      status.textContent = `${(err as Error).message}。時間をおいて再度お試しいただくか、お電話でご連絡ください。`;
+      status.classList.add('ng');
+    } finally {
+      btn.disabled = false;
+    }
+  });
+</script>

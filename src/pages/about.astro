@@ -1,0 +1,103 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { org } from '../data/site';
+const mapQuery = encodeURIComponent('東京都足立区梅田7-29-18');
+---
+<Base title="私たちについて" description="NPO法人 Human Animal Pairs の理念、代表あいさつ、団体概要、アクセス。">
+  <PageHero en="About us" title="私たちについて" lead="人と動物の絆をつくることを目的とした団体です。" />
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Mission</span>
+        <h2>私たちの想い</h2>
+      </div>
+      <div class="prose">
+        <p class="lead">
+          Human Animal Pairs は、獣医師を中心に立ち上げたNPO法人です。
+          多頭飼育崩壊など社会で問題となっている動物の課題に向き合い、
+          保護された動物たちが新しい家族と出会える仕組みをつくっています。
+        </p>
+        <p>
+          同時に、動物のお世話を子どもたちのボランティア活動として地域に開くことで、
+          命を大切にする心を育む社会教育の一助となることを目指しています。
+          人と動物が「ペア」として支え合える地域を、一歩ずつ広げていきます。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Message</span>
+        <h2>代表あいさつ</h2>
+      </div>
+      <div class="card message">
+        <p><span class="todo">【要確認】代表からのメッセージ本文をここに入れてください。（300〜500字程度がおすすめです）</span></p>
+        <p class="sign">{org.name}<br />{org.representativeTitle}　<strong>{org.representative}</strong></p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Profile</span>
+        <h2>団体概要</h2>
+      </div>
+      <table class="info-table">
+        <tbody>
+          <tr><th>法人名</th><td>{org.name}<br /><span class="muted small">（{org.kana}）</span></td></tr>
+          <tr><th>代表者</th><td>{org.representative}</td></tr>
+          <tr><th>所在地</th><td>{org.address}</td></tr>
+          <tr><th>電話番号</th><td><a href={`tel:${org.tel.replace(/-/g, '')}`}>{org.tel}</a></td></tr>
+          <tr><th>設立</th><td>{org.established}</td></tr>
+          <tr><th>法人番号</th><td>{org.corporateNumber}</td></tr>
+          <tr><th>認定</th><td>{org.certification}</td></tr>
+          <tr><th>活動分野</th><td>{org.fields.join('／')}</td></tr>
+          <tr>
+            <th>主な事業</th>
+            <td>
+              <ul class="check-list">
+                <li>地域猫のTNR推進</li>
+                <li>保護猫・保護犬の譲渡</li>
+                <li>譲渡型保護猫カフェ「CAT HOME GARDEN」の運営</li>
+                <li>子どもたちのボランティア活動の仕組みづくり</li>
+                <li>空き家の利活用と地域コミュニティの醸成</li>
+                <li>愛玩動物看護師の支援</li>
+              </ul>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Access</span>
+        <h2>アクセス</h2>
+        <p>{org.address}</p>
+      </div>
+      <div class="map">
+        <iframe
+          title="Human Animal Pairs 所在地の地図"
+          src={`https://www.google.com/maps?q=${mapQuery}&output=embed`}
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .message { padding: 40px; }
+  .sign { text-align: right; margin-top: 24px; }
+  .map { aspect-ratio: 16 / 10; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow); background: #eee; }
+  .map iframe { width: 100%; height: 100%; border: 0; }
+  @media (max-width: 640px) { .message { padding: 28px 22px; } .map { aspect-ratio: 4 / 5; } }
+</style>

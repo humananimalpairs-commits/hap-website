@@ -1,0 +1,83 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { cafe, links } from '../data/site';
+const todo = (s: string) => s.startsWith('【要確認】');
+const rows = [
+  ['所在地', cafe.address],
+  ['営業時間', cafe.hours],
+  ['定休日', cafe.closed],
+  ['料金', cafe.fee],
+  ['ご予約', cafe.reservation],
+];
+---
+<Base title="保護猫カフェ CAT HOME GARDEN" description="NPO法人 Human Animal Pairs が運営する譲渡型保護猫カフェ「CAT HOME GARDEN」のご案内。">
+  <PageHero en="Protected cat café" title="CAT HOME GARDEN" lead={cafe.catch} />
+
+  <section class="section">
+    <div class="container intro">
+      <img src="/images/cafe.jpg" alt="CAT HOME GARDEN の店内でくつろぐ猫" width="640" height="420" />
+      <div>
+        <h2>猫たちの「おうち」で、<br />運命の出会いを。</h2>
+        <p>
+          CAT HOME GARDEN は、動物病院で保護された猫たちが新しい家族を待つ、譲渡型の保護猫カフェです。
+          空き家を活用したあたたかな空間で、猫たちはのびのびと暮らしています。
+        </p>
+        <p>
+          ふれあいを楽しむだけのご来店も大歓迎です。カフェの利用料は、猫たちの医療費やごはん代として活動に役立てられます。
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section tint">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Information</span>
+        <h2>ご利用案内</h2>
+      </div>
+      <table class="info-table">
+        <tbody>
+          {rows.map(([k, v]) => (
+            <tr><th>{k}</th><td>{todo(v) ? <span class="todo">{v}</span> : v}</td></tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container narrow">
+      <div class="section-head">
+        <span class="en">Rules</span>
+        <h2>ご来店時のお願い</h2>
+        <p>猫たちが安心して過ごせるよう、ご協力をお願いします。</p>
+      </div>
+      <div class="card">
+        <ul class="check-list">
+          <li>入店前に手洗い・消毒をお願いします</li>
+          <li>寝ている猫は起こさず、そっと見守ってください</li>
+          <li>抱っこや追いかけることはご遠慮ください</li>
+          <li>猫へのおやつは、スタッフが用意したもののみとなります</li>
+          <li>フラッシュ撮影はご遠慮ください</li>
+          <li>小学生以下のお子さまは保護者の方とご一緒にご来店ください</li>
+        </ul>
+        <p class="small muted" style="margin-top:16px"><span class="todo">【要確認】実際のルールに合わせて調整してください</span></p>
+      </div>
+      <div class="center" style="margin-top:40px">
+        <div class="btn-row">
+          <a class="btn" href="/cats/">里親募集中の猫を見る</a>
+          {links.line && <a class="btn outline" href={links.line} target="_blank" rel="noopener">LINEで予約・相談</a>}
+          <a class="btn outline" href="/contact/">お問い合わせ</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .intro { display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center; }
+  .intro img { border-radius: var(--radius); box-shadow: var(--shadow); width: 100%; aspect-ratio: 4/3; object-fit: cover; }
+  .intro h2 { font-size: clamp(1.4rem, 3vw, 1.9rem); }
+  @media (max-width: 860px) { .intro { grid-template-columns: 1fr; gap: 28px; } }
+</style>

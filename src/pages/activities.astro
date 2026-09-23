@@ -1,0 +1,75 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Icon from '../components/Icon.astro';
+import { links } from '../data/site';
+
+const items = [
+  {
+    icon: 'heart', en: 'Rescue & Adoption', title: '保護猫・保護犬の譲渡',
+    body: '動物病院で保護した猫たちに、健康チェック・ワクチン・不妊去勢手術などの医療ケアを行ったうえで、新しい家族へつなぎます。獣医師が中心の団体だからこそ、一頭一頭の健康状態を丁寧に把握したうえでお渡しします。',
+    link: { href: '/cats/', label: '里親募集を見る' },
+  },
+  {
+    icon: 'paw', en: 'TNR', title: '地域猫のTNR推進',
+    body: '野良猫を捕獲（Trap）し、不妊去勢手術（Neuter）を行い、元の場所に戻す（Return）TNR活動を推進しています。望まれない繁殖を防ぎ、地域の方と協力しながら、猫と人が穏やかに暮らせるまちを目指します。',
+  },
+  {
+    icon: 'home', en: 'Cat café', title: '譲渡型保護猫カフェの運営',
+    body: '空き家を活用した譲渡型保護猫カフェ「CAT HOME GARDEN」を運営しています。カフェでゆっくり猫たちと過ごすことで、性格や相性を知ったうえで家族として迎えていただけます。',
+    link: { href: '/cat-home-garden/', label: 'カフェの案内' },
+  },
+  {
+    icon: 'child', en: 'Education', title: '子どもたちのボランティア・社会教育',
+    body: '中高生から社会人まで、さまざまなボランティアが活動に参加しています。猫のお世話や譲渡会の運営を通じて、命の大切さや責任感、地域で支え合うことを学ぶ機会をつくっています。',
+    link: { href: '/support/#volunteer', label: 'ボランティアについて' },
+  },
+  {
+    icon: 'town', en: 'Community', title: '空き家の利活用と地域づくり',
+    body: '地域の空き家を保護猫の拠点として再生し、動物をきっかけに人が集まる場所をつくっています。世代を越えて人がつながる地域コミュニティを育てます。',
+  },
+  {
+    icon: 'cross', en: 'Veterinary nurses', title: '愛玩動物看護師の支援',
+    body: '国家資格となった愛玩動物看護師のみなさんが、学び合い・つながり・長く働き続けられるよう、コミュニティ運営を支援しています。動物病院の経営や労働環境の改善にも取り組みます。',
+    link: { href: links.vtCommunity, label: 'コミュニティサイトへ' },
+  },
+] as const;
+---
+<Base title="活動内容" description="保護猫の譲渡、TNR、保護猫カフェ運営、子どもたちのボランティア、地域づくり、愛玩動物看護師の支援など、Human Animal Pairs の活動をご紹介します。">
+  <PageHero en="Activities" title="活動内容" lead="動物を守ること、人を育てること、地域をつなぐこと。" />
+
+  <section class="section">
+    <div class="container">
+      <div class="acts">
+        {items.map((it, i) => (
+          <article class={`act ${i % 2 ? 'rev' : ''}`}>
+            <div class="act-icon"><Icon name={it.icon} /></div>
+            <div class="act-body">
+              <span class="en-label">{String(i + 1).padStart(2, '0')} — {it.en}</span>
+              <h2>{it.title}</h2>
+              <p>{it.body}</p>
+              {'link' in it && it.link && <a class="more" href={it.link.href}>{it.link.label} →</a>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .acts { display: grid; gap: 28px; max-width: 920px; margin: 0 auto; }
+  .act { display: grid; grid-template-columns: 120px 1fr; gap: 32px; align-items: start; background: #fff; border-radius: var(--radius); padding: 36px; border: 1px solid var(--line); box-shadow: var(--shadow); }
+  .act-icon { width: 120px; height: 120px; border-radius: 50%; background: var(--brand-tint); color: var(--brand-strong); display: grid; place-items: center; }
+  .rev .act-icon { background: var(--leaf-soft); color: #4f7a56; }
+  .act-icon :global(svg) { width: 56px; height: 56px; }
+  .en-label { display: block; font-family: var(--font-round); color: var(--brand); letter-spacing: 0.15em; font-weight: 700; font-size: 0.8rem; text-transform: uppercase; margin-bottom: 4px; }
+  .act h2 { font-size: 1.4rem; }
+  .act p { margin-bottom: 12px; }
+  .more { font-weight: 700; font-family: var(--font-round); }
+  @media (max-width: 640px) {
+    .act { grid-template-columns: 1fr; gap: 12px; padding: 28px 22px; }
+    .act-icon { width: 72px; height: 72px; }
+    .act-icon :global(svg) { width: 36px; height: 36px; }
+  }
+</style>

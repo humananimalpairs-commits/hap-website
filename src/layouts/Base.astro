@@ -1,0 +1,63 @@
+---
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { org } from '../data/site';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+}
+const { title, description, image = '/images/ogp.png' } = Astro.props;
+const fullTitle = title ? `${title}｜${org.shortName}` : `${org.name}｜${org.tagline}`;
+const desc =
+  description ??
+  '人と動物の絆をつくるNPO法人 Human Animal Pairs。獣医師を中心に、保護猫の譲渡・保護猫カフェ「CAT HOME GARDEN」の運営、子どもたちのボランティア活動を通じた社会教育に取り組んでいます。';
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL(image, Astro.site);
+---
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{fullTitle}</title>
+    <meta name="description" content={desc} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/png" href="/favicon.png" />
+    <link rel="apple-touch-icon" href="/favicon.png" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={org.shortName} />
+    <meta property="og:title" content={fullTitle} />
+    <meta property="og:description" content={desc} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="theme-color" content="#f4a58c" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script type="application/ld+json" set:html={JSON.stringify({
+      '@context': 'https://schema.org',
+      '@type': 'NGO',
+      name: org.name,
+      alternateName: org.shortName,
+      url: org.url,
+      logo: new URL('/images/logo.png', Astro.site).href,
+      telephone: org.tel,
+      address: { '@type': 'PostalAddress', postalCode: '123-0851', addressRegion: '東京都', addressLocality: '足立区', streetAddress: '梅田7-29-18', addressCountry: 'JP' },
+    })} />
+  </head>
+  <body>
+    <a class="sr-only" href="#main">本文へ移動</a>
+    <Header />
+    <main id="main">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

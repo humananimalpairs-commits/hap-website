@@ -1,0 +1,28 @@
+---
+import { formatDate, type News } from '../lib/content';
+interface Props { items: News[] }
+const { items } = Astro.props;
+---
+<ul class="news-list">
+  {items.map((n) => (
+    <li>
+      <a href={`/news/${n.slug}/`}>
+        <time datetime={n.date}>{formatDate(n.date)}</time>
+        <span class="tag">{n.category}</span>
+        <span class="t">{n.title}</span>
+      </a>
+    </li>
+  ))}
+</ul>
+<style>
+  .news-list { list-style: none; margin: 0; padding: 0; background: #fff; border-radius: var(--radius); box-shadow: var(--shadow); border: 1px solid var(--line); }
+  .news-list li + li { border-top: 1px solid var(--line); }
+  .news-list a { display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 16px; padding: 20px 26px; color: var(--ink); text-decoration: none; }
+  .news-list a:hover .t { color: var(--brand-strong); text-decoration: underline; }
+  time { font-family: var(--font-round); color: var(--ink-soft); font-size: 0.9rem; }
+  .tag { justify-self: start; }
+  @media (max-width: 640px) {
+    .news-list a { grid-template-columns: auto 1fr; gap: 6px 12px; padding: 18px 20px; }
+    .t { grid-column: 1 / -1; }
+  }
+</style>

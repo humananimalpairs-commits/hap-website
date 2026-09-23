@@ -1,0 +1,70 @@
+---
+import { org, links, nav } from '../data/site';
+const sns = [
+  { label: 'Instagram', href: links.instagram },
+  { label: 'X', href: links.x },
+  { label: 'Facebook', href: links.facebook },
+  { label: 'LINE', href: links.line },
+].filter((s) => s.href);
+const year = new Date().getFullYear();
+---
+<section class="support-band">
+  <div class="container band-inner">
+    <div>
+      <p class="band-en">SUPPORT US</p>
+      <h2>小さな命をつなぐ活動を、<br class="sp" />一緒に支えてください</h2>
+      <p class="band-text">当法人は<strong>特例認定NPO法人</strong>です。ご寄付は確定申告により寄附金控除の対象となります。</p>
+    </div>
+    <div class="btn-row">
+      <a class="btn" href={links.syncable} target="_blank" rel="noopener">寄付する</a>
+      <a class="btn outline" href="/support/">ご支援の方法</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer">
+  <div class="container foot-grid">
+    <div class="foot-org">
+      <img src="/images/logo.png" alt="人と動物の絆をつくる Human Animal Pairs" width="220" height="137" />
+      <p class="small">
+        {org.name}<br />
+        {org.address}<br />
+        TEL <a href={`tel:${org.tel.replace(/-/g, '')}`}>{org.tel}</a>
+      </p>
+    </div>
+    <nav aria-label="フッターメニュー" class="foot-nav">
+      <ul>
+        <li><a href="/">トップ</a></li>
+        {nav.map((n) => <li><a href={n.href}>{n.label}</a></li>)}
+        <li><a href="/support/">ご支援のお願い</a></li>
+        <li><a href="/contact/">お問い合わせ</a></li>
+        <li><a href="/privacy/">プライバシーポリシー</a></li>
+      </ul>
+      {sns.length > 0 && (
+        <ul class="sns">
+          {sns.map((s) => <li><a href={s.href} target="_blank" rel="noopener">{s.label}</a></li>)}
+        </ul>
+      )}
+    </nav>
+  </div>
+  <p class="copy">© {year} {org.name}</p>
+</footer>
+
+<style>
+  .support-band { background: linear-gradient(135deg, #fde2d7, #fff1ea 60%, #f2f7ef); padding: 64px 0; }
+  .band-inner { display: flex; align-items: center; justify-content: space-between; gap: 32px; flex-wrap: wrap; }
+  .band-en { font-family: var(--font-round); color: var(--brand-strong); letter-spacing: 0.25em; font-weight: 700; font-size: 0.8rem; margin: 0 0 4px; }
+  .support-band h2 { font-size: clamp(1.3rem, 3vw, 1.8rem); margin-bottom: 8px; }
+  .band-text { margin: 0; color: var(--ink-soft); }
+  .sp { display: none; }
+  .site-footer { background: #fff; border-top: 1px solid var(--line); padding: 56px 0 0; }
+  .foot-grid { display: flex; justify-content: space-between; gap: 40px; flex-wrap: wrap; }
+  .foot-org img { width: 200px; margin-bottom: 16px; }
+  .foot-org p { color: var(--ink-soft); line-height: 1.8; }
+  .foot-nav ul { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(2, auto); gap: 6px 40px; }
+  .foot-nav a { color: var(--ink); text-decoration: none; font-size: 0.92rem; }
+  .foot-nav a:hover { color: var(--brand-strong); text-decoration: underline; }
+  .sns { margin-top: 20px !important; display: flex !important; gap: 16px !important; }
+  .copy { text-align: center; font-size: 0.8rem; color: var(--ink-soft); padding: 24px 0; margin: 40px 0 0; border-top: 1px solid var(--line); }
+  @media (max-width: 640px) { .sp { display: inline; } .foot-nav ul { gap: 6px 24px; } }
+</style>

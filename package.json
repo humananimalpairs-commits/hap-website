@@ -1,0 +1,14 @@
+{
+  "name": "hap-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node scripts/fetch-notion.mjs && astro dev",
+    "notion": "node scripts/fetch-notion.mjs",
+    "build": "node scripts/fetch-notion.mjs && astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "^5.14.0"
+  }
+}

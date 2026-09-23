@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import { org } from '../data/site';
+---
+<Base title="プライバシーポリシー">
+  <PageHero en="Privacy policy" title="プライバシーポリシー" />
+  <section class="section">
+    <div class="container narrow prose">
+      <p>{org.name}（以下「当法人」）は、みなさまの個人情報を適切に取り扱うため、以下のとおりプライバシーポリシーを定めます。</p>
+      <h2>1. 取得する情報</h2>
+      <p>お問い合わせ、ご寄付、会員登録、猫の譲渡のお申し込み、ボランティアへの応募などの際に、お名前・連絡先・住所などの個人情報をお預かりします。</p>
+      <h2>2. 利用目的</h2>
+      <ul>
+        <li>お問い合わせへの回答・ご連絡</li>
+        <li>寄付の受領、領収書の発行、活動報告のお届け</li>
+        <li>保護動物の譲渡に関する審査・手続き・譲渡後のご連絡</li>
+        <li>ボランティア活動のご案内・調整</li>
+        <li>法令に基づく対応</li>
+      </ul>
+      <h2>3. 第三者への提供</h2>
+      <p>法令に基づく場合を除き、ご本人の同意なく個人情報を第三者に提供することはありません。</p>
+      <h2>4. 外部サービスの利用</h2>
+      <p>オンライン寄付には「Syncable」を利用しています。お問い合わせ内容の管理には業務用クラウドサービスを利用し、適切な安全管理措置を講じます。当サイトではアクセス状況の把握のため、Cookie を使用した解析ツールを利用する場合があります。</p>
+      <h2>5. 開示・訂正・削除</h2>
+      <p>ご本人から個人情報の開示・訂正・利用停止・削除のご請求があった場合は、本人確認のうえ速やかに対応いたします。</p>
+      <h2>6. お問い合わせ窓口</h2>
+      <p>{org.name}<br />{org.address}<br />TEL {org.tel}</p>
+      <p class="small muted">制定日：<span class="todo">【要確認】</span></p>
+    </div>
+  </section>
+</Base>
