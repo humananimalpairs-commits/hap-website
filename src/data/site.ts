@@ -15,7 +15,6 @@ export const org = {
   email: 'info@humananimalpairs.com', // 【要確認】実際の受付アドレス
   established: '2018年5月9日（東京都 設立認証）',
   corporateNumber: '5011805002778',
-  certification: '特例認定NPO法人（東京都）',
   fields: ['社会教育の推進', '環境の保全', '子どもの健全育成', 'NPO活動の支援'],
   url: 'https://humananimalpairs.com',
 };
@@ -34,12 +33,11 @@ export const links = {
 
 export const cafe = {
   name: 'CAT HOME GARDEN',
-  catch: '保護猫と出会える、譲渡型の保護猫カフェ',
-  address: '【要確認】カフェの所在地',
-  hours: '【要確認】例: 11:00〜18:00',
-  closed: '【要確認】例: 水曜日',
-  fee: '【要確認】例: 30分 ○○円（ワンドリンク付き）',
-  reservation: '【要確認】予約方法（LINE・電話など）',
+  catch: '美味しいコーヒーと猫がいる、譲渡型の保護猫カフェ',
+  address: '〒120-0015 東京都足立区足立4-14-1',
+  access: '東武スカイツリーライン「五反野駅」から徒歩約8分（駐車場はありません）',
+  url: 'https://cathomegarden.com/',
+  instagram: 'https://www.instagram.com/gardencathome/',
 };
 
 export const nav = [

@@ -46,7 +46,7 @@ const openCats = cats.filter((c) => c.status !== '譲渡決定').slice(0, 3);
         <div class="card">
           <div class="icon-badge"><Icon name="heart" /></div>
           <h3>保護と譲渡</h3>
-          <p>動物病院で保護した猫たちに医療ケアを行い、新しい家族へつなぎます。地域猫のTNR活動も推進しています。</p>
+          <p>動物病院で保護した猫たちに医療ケアを行い、新しい家族へつなぎます。</p>
         </div>
         <div class="card">
           <div class="icon-badge"><Icon name="child" /></div>
@@ -54,9 +54,9 @@ const openCats = cats.filter((c) => c.status !== '譲渡決定').slice(0, 3);
           <p>中高生から社会人まで、さまざまなボランティアが参加。動物のお世話を通じて、命と向き合う学びの場をつくります。</p>
         </div>
         <div class="card">
-          <div class="icon-badge"><Icon name="town" /></div>
-          <h3>地域のつながりづくり</h3>
-          <p>空き家を活用した譲渡型保護猫カフェを拠点に、動物をきっかけとした地域コミュニティを育てています。</p>
+          <div class="icon-badge"><Icon name="shield" /></div>
+          <h3>ペット信託の支援</h3>
+          <p>飼い主さまに「もしも」のことがあっても、大切なペットが安心して暮らし続けられるよう、ペット信託のご相談をサポートしています。</p>
         </div>
       </div>
       <p class="center" style="margin-top:36px"><a class="btn outline" href="/activities/">活動内容を詳しく見る</a></p>
@@ -73,7 +73,7 @@ const openCats = cats.filter((c) => c.status !== '譲渡決定').slice(0, 3);
         <span class="en-label">Protected cat café</span>
         <h2>保護猫カフェ<br />CAT HOME GARDEN</h2>
         <p>{cafe.catch}。カフェでくつろぎながら猫たちとふれあい、相性の良い子と出会えます。気になる子がいたら、スタッフにお気軽にご相談ください。</p>
-        <p class="btn-row"><a class="btn" href="/cat-home-garden/">カフェの案内を見る</a></p>
+        <p class="btn-row"><a class="btn" href="/cat-home-garden/">カフェの案内を見る</a><a class="btn outline" href={cafe.url} target="_blank" rel="noopener">公式サイト ↗</a></p>
       </div>
     </div>
   </section>

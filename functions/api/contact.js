@@ -9,7 +9,7 @@
 //   TURNSTILE_SECRET_KEY  … スパム対策 Cloudflare Turnstile（任意）
 
 const TYPES = {
-  general: '一般', adoption: '譲渡', cafe: 'カフェ', volunteer: 'ボランティア',
+  general: '一般', adoption: '譲渡', cafe: 'カフェ', volunteer: 'ボランティア', trust: 'ペット信託',
   support: '寄付・支援', media: '取材・講演', other: 'その他',
 };
 
