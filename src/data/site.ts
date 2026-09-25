@@ -23,8 +23,8 @@ export const links = {
   syncable: 'https://syncable.biz/associate/HAP',
   tokyoLedger:
     'https://www.seikatubunka1.metro.tokyo.lg.jp/houjin/npo_houjin/list/ledger/0012896.html',
-  // 愛玩動物看護師コミュニティ（別サイト）。URLが決まったら差し替え
-  vtCommunity: '#', // 【要確認】
+  // 愛玩動物看護師コミュニティLP（public/community/ に配置）
+  vtCommunity: '/community/',
   instagram: '', // 【要確認】例: https://www.instagram.com/xxxx
   x: '', // 【要確認】
   facebook: '', // 【要確認】
